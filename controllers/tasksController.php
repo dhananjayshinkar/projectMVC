@@ -14,18 +14,14 @@ class tasksController extends http\controller
         //$records = todos::findAll();
         //self::getTemplate('all_tasks', $records);
          $records = todos::findAll();
-        //print_r($records);
-                session_start();
-           if(key_exists('userID',$_SESSION)) {
-               $userID = $_SESSION['userID'];
+         session_start();
+         if(key_exists('userID',$_SESSION)) {
                $userID = $_SESSION['userID'];
                $records = todos::findTasksbyID($userID);
                self::getTemplate('all_tasks', $records);
            } else {
                echo 'you must be logged in to view tasks';
            }
-        //session_start();
-        //echo $_SESSION['userID'];
     }
     //to call the show function the url is called with a post to: index.php?page=task&action=create
     //this is a function to create new tasks
