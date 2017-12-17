@@ -16,5 +16,8 @@
 <?php
 print utility\htmlTable::genarateTableFromMultiArray($data);
 ?>
+<footer class="container-fluid text-center">
+  <p>WSD Final Project - dps48</p>
+</footer>
 </body>
 </html>

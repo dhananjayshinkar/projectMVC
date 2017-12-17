@@ -8,137 +8,157 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 650px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
+    .container-fluid{
+        margin-top: 18px;
+        font-family: "verdana";
       }
-      .row.content {height:auto;} 
-    }
-    
-    .glyphicon {
-    height:42px;
-    font-size: 18px;
-}
-    label{
-      width:100px;
-    }
+
+      .profile-btn, .logout-btn, .home-btn{
+        width: 50%;
+        height: 45%;
+        font-size: large;
+      }
+
+      .logout-btn{
+        float: right;
+      }
+
+      .home-btn-col{
+        text-align: center;
+      }
+
+      .createtask-heading{
+        text-align: center;
+        margin-top: 4%;
+      }
+
+      .formelements{
+        text-align: center;
+        margin-top: 3%;
+        background-color: #ffffcc;
+
+      }
+
+      .login-label{
+            font-size: 20px;          
+         }
+
+
+      .container-fluid.text-center{
+        position: fixed;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+        left:0;
+        bottom: 0;
+        height: 4%;
+        font-size: 23px;
+      }
+
+      
   </style>
 </head>
 
 
-<body text-align:center>
-
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-      
-      <li><div>
+<body>
+   
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
         <form action="index.php?page=accounts&action=show" method="POST">
-        <button type="submit" class="glyphicon glyphicon-user">Your Profile</button>
-        </form></div></li>
+        <button type="submit" class="btn btn-primary profile-btn" ><span class="glyphicon glyphicon-user"></span>Your Profile</button>
+        </form>
+       
+      </div>
+      
+      <div class="col-md-4 home-btn-col"> 
+         <a href="index.php?page=accounts&action=back1" class="btn btn-primary home-btn">Home</a>   
+      </div>
         
-        <li><div>
+      <div class="col-md-4">
         <form action="index.php?page=accounts&action=logout" method="POST">
-        <button type="submit" class="glyphicon glyphicon-log-out">Logout</button>
-        </form></div></li>
-      </ul>
+        <button type="submit" class="btn btn-primary logout-btn"><span class="glyphicon glyphicon-log-out"></span>Logout</button>
+        </form>
+      </div>
+
     </div>
-  </div>
-</nav>
 
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 createtask-heading">
+        <h3> Edit Task Details </h3>
+      </div>
+      <div class="col-md-4"></div>      
     </div>
-    <div class="col-sm-8 text-center"> 
-    <h3> Edit Details </h3>
-<form action="index.php?page=tasks&action=store&id=<?php echo $data->id; ?>" method="post" class = "form-inline" id="form1">
-<div class = "form-group">
-<label>ID-</label>
-<input type="text" class="form-control" name="id" value="<?php echo $data->id;?>" readonly>
-</div><br><br>
+    
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4 formelements">
 
-<div class = "form-group">
-<label>Owner Email-</label>
-<input type="text" class="form-control" name="owneremail" value="<?php echo $data->owneremail;?>">
-</div><br><br>
+        <form action="index.php?page=tasks&action=store&id=<?php echo $data->id; ?>" method="post" class = "form-horizontal" id="form1">
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">ID:</label>
+                  <div class="col-xs-8">
+                   <input type="text" class="form-control" name="id" value="<?php echo $data->id;?>" readonly>
+                    </div>
+                  </div>
 
-<div class = "form-group">
-<label>Owner ID-</label>
-<input type="text" class="form-control" name="ownerid" value="<?php echo $data->ownerid;?>" readonly>
-</div><br><br>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Owner Email:</label>
+                  <div class="col-xs-8">
+                  <input type="text" class="form-control" name="owneremail" value="<?php echo $data->owneremail;?>">
+                </div>
+                  </div>
 
-<div class = "form-group">
-<label>Created Date-</label>
-<input type="text" class="form-control" name="createddate" value="<?php echo $data->createddate;?>" readonly>
-</div><br><br>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Owner ID:</label>
+                  <div class="col-xs-8">
+                  <input type="text" class="form-control" name="ownerid" value="<?php echo $data->ownerid;?>" readonly>
+                  </div>
+                </div>
 
-<div class = "form-group">
-<label>Due Date-</label>
-<input type="text" class="form-control" name="duedate" value="<?php echo $data->duedate;?>" readonly>
-</div><br><br>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Created Date:</label>
+                  <div class="col-xs-8">
+                  <input type="text" class="form-control" name="createddate" value="<?php echo $data->createddate;?>" readonly>
+                  </div>
+                </div>
 
-<div class = "form-group">
-<label>Message-</label>
-<input type="text" class="form-control" name="message" value="<?php echo $data->message;?>">
-</div><br><br>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Due Date:</label>
+                  <div class="col-xs-8">
+                  <input type="text" class="form-control" name="duedate" value="<?php echo $data->duedate;?>" readonly>
+                  </div>
+                </div>
 
-<div class = "form-group">
-<label>Is Done-</label>
-<input type="text" class="form-control" name="isdone" value="<?php echo $data->isdone;?>">
-</div><br><br>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Message:</label>
+                  <div class="col-xs-8">
+                  <input type="text" class="form-control" name="message" value="<?php echo $data->message;?>">
+                  </div>
+                </div>
 
-<button type="submit" class="btn btn-primary" form="form1" value="save">Save</button>
-</form>
+                  <div class = "form-group">
+                  <label class="control-label col-xs-4">Is Done:</label>
+                  <div class="col-xs-8">
+                     <input type="text" class="form-control" name="isdone" value="<?php echo $data->isdone;?>">
+                   </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" form="form1" value="save">Save</button>
+          </form>
+        </div>
+        <div class="col-md-4"></div>
+    
+
 </div>
 
-<div class="col-sm-2 sidenav">
-    </div>
-  </div>
 </div>
-
-<footer class="container-fluid text-center">
-  <p>Web System Development</p>
-</footer>
-
-
 
 <script src="js/scripts.js"></script>
+
+<footer class="container-fluid text-center">
+  <p>WSD Final Project - dps48</p>
 </body>
 </html>

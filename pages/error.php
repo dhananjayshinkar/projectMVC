@@ -87,7 +87,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Web System Development</p>
+  <p>WSD Final Project - dps48</p>
 </footer>
 
 
