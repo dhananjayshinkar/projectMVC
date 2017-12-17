@@ -94,7 +94,7 @@ $text='';
 $text.='<h2>Pending Tasks</h2><br>';
 $text.='<a href="index.php?page=tasks&action=create"><span class="glyphicon glyphicon-plus">Create New Task</span></a>';
 if($data==FALSE){
-  $text.='No records found';
+  $text.='<br>No records found';
   $text.='</center>';
   echo $text;
 }
