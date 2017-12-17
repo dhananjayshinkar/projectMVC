@@ -1,20 +1,9 @@
 <?php
 namespace database;
-
-use http\controller;
-
 abstract class model
 {
-
     public function save()
     {
-
-        if($this->validate() == FALSE) {
-            echo 'failed validation';
-            exit;
-        }
-
-
         if ($this->id != '') {
             $sql = $this->update();
         } else {
@@ -23,68 +12,58 @@ abstract class model
         }
         $db = dbConn::getConnection();
         $statement = $db->prepare($sql);
-        $array = get_object_vars($this);
-
-        if ($INSERT == TRUE) {
-
-            unset($array['id']);
-
-        }
-
-        foreach (array_flip($array) as $key => $value) {
-            $statement->bindParam(":$value", $this->$value);
-        }
         $statement->execute();
-        if ($INSERT == TRUE) {
-
-            $this->id = $db->lastInsertId();
-
-        }
-
-
-        return $this->id;
-        }
-
-
-
+    }
+    
+    public function lastID(){
+      $modelName = static::$modelName;
+      $tableName = $modelName::getTablename();
+      $db = dbConn::getConnection();
+      $sql='select MAX(id) from '.$tableName;
+      //echo $sql;
+      $statement = $db->prepare($sql);
+      $statement->execute();
+      $statement->setFetchMode();
+      $recordsSet =  $statement->fetchAll(\PDO::FETCH_ASSOC);
+      $record=$recordsSet[0];
+      $LastID= $record["MAX(id)"];
+      //echo $LastID;
+      return $LastID+1;
+    }
     private function insert()
     {
-
+        //echo 'in insert';
+        $id=$this->lastID();
+        $this->id=$id;
         $modelName = static::$modelName;
         $tableName = $modelName::getTablename();
         $array = get_object_vars($this);
-        unset($array['id']);
-        $columnString = implode(',', array_flip($array));
-        $valueString = ':' . implode(',:', array_flip($array));
-        $sql = 'INSERT INTO ' . $tableName . ' (' . $columnString . ') VALUES (' . $valueString . ')';
+        $columnString = array_keys($array);
+        $columnString1=implode(',', $columnString);
+        $valueString = "'".implode("','", $array)."'";
+        $sql = 'INSERT INTO ' . $tableName . ' (' . $columnString1 . ') VALUES (' . $valueString . ')';
+        //echo $sql;
         return $sql;
     }
-
-    public function validate() {
-
-        return TRUE;
-    }
-
     private function update()
     {
-
         $modelName = static::$modelName;
         $tableName = $modelName::getTablename();
         $array = get_object_vars($this);
-
         $comma = " ";
         $sql = 'UPDATE ' . $tableName . ' SET ';
         foreach ($array as $key => $value) {
             if (!empty($value)) {
+            //echo '<br>';
+            //echo $value;
                 $sql .= $comma . $key . ' = "' . $value . '"';
                 $comma = ", ";
             }
         }
         $sql .= ' WHERE id=' . $this->id;
+        //echo $sql;
         return $sql;
-
     }
-
     public function delete()
     {
         $db = dbConn::getConnection();
@@ -95,5 +74,4 @@ abstract class model
         $statement->execute();
     }
 }
-
 ?>
