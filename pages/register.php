@@ -129,8 +129,6 @@
 </div>
   
 
-<script src="js/scripts.js"></script>
-
 <footer class="container-fluid text-center">
   <p>WSD Final Project - dps48</p>
 

@@ -158,6 +158,5 @@
   <p>WSD Final Project - dps48</p>
 </footer>
 
-<script src="js/scripts.js"></script>
 </body>
 </html>

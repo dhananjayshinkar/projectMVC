@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Task manager</title>
+  <title>All Tasks</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -75,8 +75,8 @@
 <div class="row">
 <?php
 $text='';
-$text.='<h2 class="pendingtask">Pending Tasks</h2><br><br>';
-$text.='<a href="index.php?page=tasks&action=create" class="btn btn-primary createtask-btn"><span class="glyphicon glyphicon-plus"></span>Create New Task</a><br>';
+$text.='<h2 class="pendingtask">Your Tasks</h2><br><br>';
+$text.='<a href="index.php?page=tasks&action=create" class="btn btn-primary createtask-btn"><span class="glyphicon glyphicon-plus"></span>Add Task</a><br>';
 if($data==FALSE){
   $text.='<br>No records found';
   $text.='</center>';
